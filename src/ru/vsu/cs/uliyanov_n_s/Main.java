@@ -1,4 +1,4 @@
-package ru.vsu.cs.uliyanov_n_s;
+package ru.vsu.cs.uliyanov_n_s; //v1.01
 
 import java.util.Scanner;
 
