@@ -1,4 +1,4 @@
-package ru.vsu.cs.uliyanov_n_s; //v1.01
+package ru.vsu.cs.uliyanov_n_s;
 
 import java.util.Scanner;
 
@@ -6,54 +6,65 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.print("Enter the number of goals of the N-team in the first match:");
-        int n1 = readGoals();
+        int n1 = readValueOfGoals("N", "first");
+        int m1 = readValueOfGoals("M", "first");
+        int n2 = readValueOfGoals("N", "second");
+        int m2 = readValueOfGoals("M", "second");
 
-        System.out.print("Enter the number of goals of the M-team in the first match:");
-        int m1 = readGoals();
+        checkCorrectnessOfScoreOfSecondMatch(n2, m2);
 
-        System.out.print("Enter the number of goals of the N-team in the second match:");
-        int n2 = readGoals();
+        String winningTeam = calculateWhoWillAdvance(n1, n2, m1, m2);
 
-        System.out.print("Enter the number of goals of the M-team in the second match:");
-        int m2 = readGoals();
+        printResult(winningTeam);
+    }
 
-        if (n1 < 0 || n2 < 0 || m1 < 0 || m2 < 0 || n2 == m2)
-            System.out.println("You entered an incorrect value!");
-        else if ((n1 + n2) > (m1 + m2))
-            System.out.print("N-team will advance to the next round");
+    public static void printResult(String winningTeam){
+        System.out.println(winningTeam + "-team will advance to next round.");
+    }
+
+    public static String calculateWhoWillAdvance(int n1, int n2, int m1, int m2) {
+
+        String winningTeam = null;
+
+        if ((n1 + n2) > (m1 + m2))
+            winningTeam = "N";
         else if ((n1 + n2) < (m1 + m2))
-            System.out.print("M-team will advance to the next round");
-        else if ((n1 + m1) == (n2 + m2))
-            finalPenaltyShootout();
+            winningTeam = "M";
         else if (n2 > m2)
-            System.out.print("N-team will advance to the next round");
+            winningTeam = "N";
         else if (m1 > n1)
-            System.out.print("M-team will advance to the next round");
+            winningTeam = "M";
 
-
+        return winningTeam;
     }
 
-    public static void finalPenaltyShootout() {
-        System.out.println("Another penalty shootout is needed!");
+    public static void checkCorrectnessOfScoreOfSecondMatch(int n2, int m2) {
 
-        System.out.print("Enter how many goals scored N-team on the final penalty shootout:");
-        int n3 = readGoals();
-
-        System.out.print("Enter how many goals scored M-team on the final penalty shootout:");
-        int m3 = readGoals();
-
-        if (n3 > m3)
-            System.out.print("N-team will advance to the next round");
-        else if (m3 > n3)
-            System.out.print("M-team will advance to the next round");
-        else
-            System.out.println("You entered an incorrect value!");
-
+        if (n2 == m2) {
+            System.out.println("It's impossible, you probably forgot about penalty shootout in the second match!");
+            System.exit(0);
+        }
     }
 
-    public static int readGoals() {
+    public static int readValueOfGoals(String nameOfTeam, String numberOfMatch) {
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextInt();
+        System.out.printf("Enter the number of goals of the %s-team in the %s match:", nameOfTeam, numberOfMatch);
+
+        int valueOfGoals;
+
+        if (scanner.hasNextInt()) {
+            valueOfGoals = scanner.nextInt();
+
+            if (valueOfGoals < 0) {
+                System.out.println("Invalid value! Try again.");
+                return readValueOfGoals(nameOfTeam, numberOfMatch);
+            }
+
+        } else {
+            System.out.println("Invalid value! Try again.");
+            return readValueOfGoals(nameOfTeam, numberOfMatch);
+        }
+
+        return valueOfGoals;
     }
 }
