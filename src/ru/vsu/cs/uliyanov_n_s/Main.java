@@ -18,7 +18,7 @@ public class Main {
         printResult(winningTeam);
     }
 
-    public static void printResult(String winningTeam){
+    public static void printResult(String winningTeam) {
         System.out.println(winningTeam + "-team will advance to next round.");
     }
 
@@ -48,7 +48,7 @@ public class Main {
 
     public static int readValueOfGoals(String nameOfTeam, String numberOfMatch) {
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("Enter the number of goals of the %s-team in the %s match:", nameOfTeam, numberOfMatch);
+        System.out.printf("Enter the value of goals of the %s-team in the %s match:", nameOfTeam, numberOfMatch);
 
         int valueOfGoals;
 
