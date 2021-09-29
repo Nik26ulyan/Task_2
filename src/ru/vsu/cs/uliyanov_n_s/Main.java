@@ -38,7 +38,7 @@ public class Main {
         return winningTeam;
     }
 
-    public static void checkCorrectnessOfScoreOfSecondMatch(int n2, int m2) {
+    static void checkCorrectnessOfScoreOfSecondMatch(int n2, int m2) {
 
         if (n2 == m2) {
             System.out.println("It's impossible, you probably forgot about penalty shootout in the second match!");
@@ -46,7 +46,7 @@ public class Main {
         }
     }
 
-    public static int readValueOfGoals(String nameOfTeam, String numberOfMatch) {
+    static int readValueOfGoals(String nameOfTeam, String numberOfMatch) {
         Scanner scanner = new Scanner(System.in);
         System.out.printf("Enter the value of goals of the %s-team in the %s match:", nameOfTeam, numberOfMatch);
 
